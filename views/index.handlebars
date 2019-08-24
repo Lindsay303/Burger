@@ -1,42 +1,79 @@
-<h1>Burgers!</h1>
+{{!-- The View component is used for all the UI logic of the application. For example, the Customer view will include all
+the UI components such as text boxes, dropdowns, etc. that the final user interacts with. --}}
 
-<div id='leftcolumn' >
-<h2>Burgers that are ready to eat</h2>
+<h1 class="text-center burgerTitle">Eat-Da-Burger!</h1>
 
-<ul>
-  {{#each burgers}}
-    {{#unless devoured}}
-      {{> burgers/burger-block devoured=true}}
-    {{/unless}}
-  {{/each}}
-</ul>
-</div>
+<div class="container-fluid">
+  <div class="row">
 
-<div id='rightcolumn'>
-<h2>Burgers that have been eaten!</h2>
+    <div class="burgerFullDiv col-xs-12 col-s-2 col-md-4 col-lg-5 col-xl-3 text-center">
+      <ol class="customcounter1">
+        {{#each burgers}} {{#unless this.devoured}}
+        <div class="notDevoured">
+          <li>{{this.burger_name}}</li>
+          <div class="wallpaperFull">
+            {{!-- Button sends this.id back to the server --}}
+            <form action="burgers/updateOne/{{this.id}}?_method=PUT" method="POST">
+              <button type="submit" class="btn btn-default btn-primary devourButton">DEVOUR IT!</button>
+            </form>
+          </div>
+        </div>
+        {{/unless}} {{/each}}
+      </ol>
+    </div>
 
-<ul>
-  {{#each burgers}}
-    {{#if devoured}}
-      {{> burgers/burger-block devoured=false}}
-    {{/if}}
-  {{/each}}
-</ul>
-</div>
+    <div class="formDiv align-center col-xs-12 col-s-8 col-md-4 col-lg-2 col-xl-2">
+      <form class="create-update-form" action="burgers/insertOne" method="POST">
+        <div class="form-group col-lg-2">
+          <textarea placeholder="Enter a burger you want to eat, and then click the submit button." id="burgername" name="burger_name"
+            rows="8" cols="40"></textarea>
+          <br>
+          <button type="submit" class="btn btn-lg btn-primary submitButton">Submit</button>
+        </div>
+      </form>
+    </div>
 
-<h2 class="create-form-label">Add a Burger</h2>
-<form class="create-form">
+    <div class="devouredDiv col-xs-12 col-s-2 col-md-4 col-lg-5 col-xl-3 text-center align-center">
 
-  <div class="form-group">
-    <label for="bg">Burger Name:</label>
-    <input type="text" id="bg" name="burger_name">
+      <div class="devouredAlready">
+        <ol class="customcounter2">
+          {{#each burgers}} {{#if this.devoured}}
+          <div class="wallpaperDevoured">
+            <li>{{this.burger_name}}</li>
+          </div>
+
+          {{/if}} {{/each}}
+      </div>
+      </ol>
+    </div>
+
   </div>
-  <br>
-  <div class="form-group">
-    <label for="devoured">Eaten?</label><br>
-    <input type="radio" name="devoured" value="1" checked> <label>Available!</label><br>
-    <input type="radio" name="devoured" value="0"> <label> Eaten</label>
+
+  <div class="footer navbar-fixed-bottom">
+    <div class="container">
+      <form action="burgers/deleteAll/?_method=DELETE" method="POST">
+        <button type="submit" class="btn btn-sm deleteButton">Delete All</button>
+      </form>
+    </div>
   </div>
 
-  <button type="submit">Add Burger</button>
-</form>
+  <script>
+    var count = 0;
+
+    function timeout() {
+      setTimeout(function () {
+        count++;
+
+        $(".wallpaperDevoured").attr("id", "imgID" + count);
+
+        if (count > 5) {
+          count = 0
+        }
+        timeout();
+
+      }, 1000);
+    }
+
+    timeout();
+
+  </script>

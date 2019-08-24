@@ -1,32 +1,35 @@
 {
   "name": "burger",
   "version": "1.0.0",
-  "description": "A Node/Express/Handlebars/MySQL Full Stack SPA for handling Hamburger orders.",
-  "main": "server.js",
+  "description": "Eat-Da-Burger! restaurant app",
+  "main": "index.js",
   "scripts": {
-    "test": "localhost:3000"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MichaelWrobelPersonal/Burger.git"
+    "url": "git+https://github.com/rocksteadyrose/burger.git"
   },
   "keywords": [
+    "burger",
+    "MySql",
     "Node",
     "Express",
-    "MySql",
-    "HandleBars",
-    "Hamburger"
+    "Handlebars",
+    "ORM"
   ],
-  "author": "Mike Wrobel",
-  "license": "SEE LICENSE IN license.dat",
+  "author": "Leslie Rose",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rocksteadyrose/burger/issues"
+  },
+  "homepage": "https://github.com/rocksteadyrose/burger#readme",
   "dependencies": {
-    "body-parser": "^1.14.2",
-    "express": "^4.13.3",
-    "express-handlebars": "^2.0.1",
-    "mysql": "^2.15.0"
-  },
-  "devDependencies": {
-    "handlebars-helper-css": "^0.1.0"
-  },
-  "homepage": "https://github.com/MichaelWrobelPersonal/Burger#readme"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "method-override": "^2.3.10",
+    "mysql": "^2.15.0",
+    "npm": "^6.1.0"
+  }
 }
